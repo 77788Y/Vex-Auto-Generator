@@ -2,7 +2,7 @@
 function rotate_around_point(point_to_rotate, point_around, angle) {
 
   let delta_x = point_to_rotate.x - point_around.x;
-  let delta_y = point_to_rotate.y - point_around.y;
+  let delta_y = -(point_to_rotate.y - point_around.y);
 
     return new Point(
       (delta_x * cos(angle)) - (delta_y * sin(angle)),

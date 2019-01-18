@@ -15,7 +15,7 @@ function draw_path_moves() {
       // draw line
       case movement.LINE:
         line(path_points[i-1].x, path_points[i-1].y, path_points[i].x, path_points[i].y);
-        path_points[i].angle = atan2(path_points[i].y - path_points[i-1].y, path_points[i].x - path_points[i-1].x);
+        path_points[i].angle = atan2(-(path_points[i].y - path_points[i-1].y), path_points[i].x - path_points[i-1].x);
       break;
 
       // draw arc

@@ -43,5 +43,6 @@ function draw() {
 
   // draw path
   draw_path_moves();
+  draw_path_points();
 
 }

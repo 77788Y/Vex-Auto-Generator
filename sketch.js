@@ -42,7 +42,6 @@ function draw() {
   image(field_img, 0, 96, field_img.width*img_scale, field_img.height*img_scale);
 
   // draw path
-  // console.log("A");
   draw_path_moves();
 
 }

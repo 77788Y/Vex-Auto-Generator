@@ -30,7 +30,6 @@ function draw_path_moves() {
         let global_center_y = path_points[i-1].y - (radius * sin(path_points[i-1].angle - 90));
 
         point(global_center_x, global_center_y);
-        console.log(p);
 
         let angle_start = path_points[i-1].angle + 90;
         let angle_diff = abs(atan2(p.y, p.x)) * 2;

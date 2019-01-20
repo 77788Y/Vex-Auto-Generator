@@ -46,6 +46,8 @@ function draw_path_moves() {
           }
           endShape();
 
+          console.log(radius, angle_diff);
+
           // adjust angle of end point
           path_points[i].angle = angle_start + angle_diff - 90;
 

@@ -16,7 +16,7 @@ function draw_path_moves() {
 
         // draw line
         case "line":
-          line(path_points[i-1].x, path_points[i-1].y, path_points[i].x, path_points[i].y);
+          line(field_size * path_points[i-1].x, field_size * path_points[i-1].y, field_size * path_points[i].x, field_size * path_points[i].y);
           path_points[i].angle = atan2(-(path_points[i].y - path_points[i-1].y), path_points[i].x - path_points[i-1].x);
         break;
 
@@ -41,12 +41,10 @@ function draw_path_moves() {
 
             let c_x = radius * cos(a);
             let c_y = radius * sin(a);
-            vertex(global_center_x + c_x, global_center_y - c_y);
+            vertex(field_size * (global_center_x + c_x), field_size * (global_center_y - c_y));
 
           }
           endShape();
-
-          console.log(radius, angle_diff);
 
           // adjust angle of end point
           path_points[i].angle = angle_start + angle_diff - 90;
@@ -63,10 +61,14 @@ function draw_path_moves() {
 function draw_path_points() {
 
   for (var i = 0; i < path_points.length; i++) {
-    fill(255);
     stroke(0);
-    strokeWeight(2);
-    point(path_points[i].x, path_points[i].y);
+    if (selected == 'field_point' && selected_index == i) strokeWeight(22);
+    else strokeWeight(10);
+    point(field_size * path_points[i].x, field_size * path_points[i].y);
+    stroke(255);
+    if (selected == 'field_point' && selected_index == i) strokeWeight(12);
+    else strokeWeight(6);
+    point(field_size * path_points[i].x, field_size * path_points[i].y);
   }
 
 }

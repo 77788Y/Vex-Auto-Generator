@@ -1,9 +1,11 @@
 /// <reference path="./p5_intellisense/p5.global-mode.d.ts" />
 
-var selected = null;
+let selected = null;
+let selected_index = 0;
 
 var field_img;
 var img_scale;
+var field_size;
 var icon_line_grey;
 var icon_line_white;
 var icon_arc_grey;
@@ -40,6 +42,8 @@ function setup() {
   if (img_ratio > display_ratio) img_scale = (width - 320) / field_img.width;
   else img_scale = (height - 96) / field_img.height;
 
+  field_size = field_img.width * img_scale;
+
 }
 
 function windowResized() {
@@ -48,6 +52,8 @@ function windowResized() {
   let display_ratio = (width - 320)/(height - 96);
   if (img_ratio > display_ratio) img_scale = (width - 320) / field_img.width;
   else img_scale = (height - 96) / field_img.height;
+
+  field_size = field_img.width * img_scale;
 }
 
 function draw() {
@@ -57,8 +63,11 @@ function draw() {
   image(field_img, 0, 96, field_img.width*img_scale, field_img.height*img_scale);
 
   // draw path
+  push();
+  translate(0, 96);
   draw_path_moves();
   draw_path_points();
+  pop();
 
   // draw side menu
   draw_menu();

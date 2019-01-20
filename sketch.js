@@ -80,7 +80,7 @@ function draw() {
   textSize(48);
   text(config.game_name, 16, 48);
   textSize(24);
-  text("Autonomous planner", 24, 80);
+  text("Autonomous generator", 24, 80);
 
   // draw title bar shadow
   setGradient(0, 96, width - 320, 16, color_translucent_black, color_transparent, 'Y');

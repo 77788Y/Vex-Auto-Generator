@@ -6,7 +6,7 @@ function run_path_manager() {
   let pts = copy_array(path_points);
   let mvs = copy_array(path_moves);
   
-  if (draw_tentative) {
+  if (draw_tentative && ['line', 'arc'].includes(selected_tool)) {
     next_point = new Point(mouseX / field_size, (mouseY - 96) / field_size);
     next_point.is_tentative = true;
 

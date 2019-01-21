@@ -64,6 +64,7 @@ function draw() {
   // unselect if escape pressed
   if (keyIsDown(ESCAPE)) {
     selected = null;
+    selected_tool = null;
   }
 
   // draw path

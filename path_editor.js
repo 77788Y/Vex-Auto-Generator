@@ -13,14 +13,14 @@ function run_path_manager() {
 
   if (path_points.length > 0) {
 
-    if (selected == 'field_point')  mvs.splice(selected_index + 1, 0, (
-      selected_tool == 'line' ? new Line() : (
+    let move = selected_tool == 'line' ? new Line() : (
       selected_tool == 'arc' ? new Arc() : null
-    )));
-    else mvs.push(
-      selected_tool == 'line' ? new Line() : (
-      selected_tool == 'arc' ? new Arc() : null
-    ));
+    );
+
+    if (keyIsDown(CONTROL) && move.type == 'arc') move.use_large = true;
+
+    if (selected == 'field_point')  mvs.splice(selected_index + 1, 0, move);
+    else mvs.push(move);
   }
   
   draw_path_moves(pts, mvs);

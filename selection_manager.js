@@ -28,15 +28,15 @@ function mousePressed() {
       mouseY < config.field_coords.start_y * img_scale + config.field_coords.height * img_scale + 96) {
 
     if (path_points.length > 0)  {
+
+      let move = selected_tool == 'line' ? new Line() : (
+        selected_tool == 'arc' ? new Arc() : null
+      );
+
+      if (keyIsDown(CONTROL) && move.type == 'arc') move.use_large = true;
       
-      if (selected == 'field_point') path_moves.splice(selected_index + 1, 0, (
-        selected_tool == 'line' ? new Line() : (
-        selected_tool == 'arc' ? new Arc() : null
-      )));
-      else path_moves.push(
-        selected_tool == 'line' ? new Line() : (
-        selected_tool == 'arc' ? new Arc() : null
-      ));
+      if (selected == 'field_point') path_moves.splice(selected_index + 1, 0, move);
+      else path_moves.push(move);
     }
 
     if (selected == 'field_point') path_points.splice(selected_index + 1, 0, new Point(mouseX / field_size, (mouseY - 96) / field_size));

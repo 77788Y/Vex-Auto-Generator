@@ -60,6 +60,11 @@ function draw() {
 
   // draw field
   image(field_img, 0, 96, field_img.width*img_scale, field_img.height*img_scale);
+  
+  // unselect if escape pressed
+  if (keyIsDown(ESCAPE)) {
+    selected = null;
+  }
 
   // draw path
   push();

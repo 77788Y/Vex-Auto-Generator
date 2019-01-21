@@ -25,5 +25,13 @@ function run_path_manager() {
   
   draw_path_moves(pts, mvs);
   draw_path_points(pts);
+}
+
+function mouseDragged() {
+
+  if (selected == 'field_point') {
+    path_points[selected_index].x = mouseX / field_size;
+    path_points[selected_index].y = (mouseY - 96) / field_size;
+  }
 
 }

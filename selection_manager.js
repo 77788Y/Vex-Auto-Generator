@@ -1,4 +1,4 @@
-function mouseClicked() {
+function mousePressed() {
 
   // try to select points
   for (let i = 0; i < path_points.length; i++) {
@@ -41,6 +41,9 @@ function mouseClicked() {
 
     if (selected == 'field_point') path_points.splice(selected_index + 1, 0, new Point(mouseX / field_size, (mouseY - 96) / field_size));
     else path_points.push(new Point(mouseX / field_size, (mouseY - 96) / field_size));
+
+    selected_index++;
+    if (selected == 'field_point' && selected_index >= path_points.length - 1) selected = null;
     return;
   }
 

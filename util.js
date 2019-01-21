@@ -16,6 +16,16 @@ function sign(a) {
   return 0;
 }
 
+function copy_array(o) {
+  var output, v, key;
+  output = Array.isArray(o) ? [] : {};
+  for (key in o) {
+      v = o[key];
+      output[key] = (typeof v === "object") ? copy_array(v) : v;
+  }
+  return output;
+}
+
 function setGradient(x, y, w, h, c1, c2, axis) {
   noFill();
   strokeWeight(1);

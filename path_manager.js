@@ -1,39 +1,41 @@
 var path_points = [];
-var path_moves = [];
+var path_moves = [null];
 var gp = new Point();
 
 // draw all the moves of a path to the screen
-function draw_path_moves() {
+function draw_path_moves(pts, mvs) {
 
-  // setup drawing mode
-  stroke(0);
-  strokeWeight(10);
-  noFill();
+  for (let i = 0; i < mvs.length; i++) {
+    if ( i >= 1 && mvs[i] != null && typeof mvs[i] == 'object' && mvs[i].hasOwnProperty('type')) {
+    
+      // setup drawing mode
+      if (pts[i-1].is_tentative || pts[i].is_tentative) stroke(0, 100);
+      else stroke(0);
+      strokeWeight(4);
+      noFill();
 
-  for (let i = 0; i < path_moves.length; i++) {
-    if (typeof path_moves[i] == 'object' && path_moves[i].hasOwnProperty('type')) {
-      switch (path_moves[i].type) {
+      switch (mvs[i].type) {
 
         // draw line
         case "line":
-          line(field_size * path_points[i-1].x, field_size * path_points[i-1].y, field_size * path_points[i].x, field_size * path_points[i].y);
-          path_points[i].angle = atan2(-(path_points[i].y - path_points[i-1].y), path_points[i].x - path_points[i-1].x);
+          line(field_size * pts[i-1].x, field_size * pts[i-1].y, field_size * pts[i].x, field_size * pts[i].y);
+          pts[i].angle = atan2(-(pts[i].y - pts[i-1].y), pts[i].x - pts[i-1].x);
         break;
 
         // draw arc
         case "arc":
-          let p = rotate_around_point(path_points[i], path_points[i-1], -path_points[i-1].angle);
+          let p = rotate_around_point(pts[i], pts[i-1], -pts[i-1].angle);
           let inner_angle = 90 - abs(atan2(p.y, p.x));
           let dist_between_points = sqrt(p.x*p.x + p.y*p.y);
           let radius = abs((dist_between_points/2)/cos(inner_angle)) * -sign(p.y);
 
-          let global_center_x = path_points[i-1].x + (radius * cos(path_points[i-1].angle - 90));
-          let global_center_y = path_points[i-1].y - (radius * sin(path_points[i-1].angle - 90));
+          let global_center_x = pts[i-1].x + (radius * cos(pts[i-1].angle - 90));
+          let global_center_y = pts[i-1].y - (radius * sin(pts[i-1].angle - 90));
 
-          let angle_start = path_points[i-1].angle + 90;
+          let angle_start = pts[i-1].angle + 90;
           let angle_diff = abs(atan2(p.y, p.x)) * 2;
           if (angle_diff > 180) angle_diff = 360 - angle_diff;
-          if (path_moves[i].use_large) angle_diff = -(360 - angle_diff);
+          if (mvs[i].use_large) angle_diff = -(360 - angle_diff);
           angle_diff *= sign(p.y) * sign(p.x);
 
           beginShape();
@@ -47,7 +49,7 @@ function draw_path_moves() {
           endShape();
 
           // adjust angle of end point
-          path_points[i].angle = angle_start + angle_diff - 90;
+          pts[i].angle = angle_start + angle_diff - 90;
 
         break;
 
@@ -58,17 +60,25 @@ function draw_path_moves() {
 }
 
 // draw all the points of a path to the screen
-function draw_path_points() {
+function draw_path_points(pts) {
 
-  for (var i = 0; i < path_points.length; i++) {
-    stroke(0);
+  for (var i = 0; i < pts.length; i++) {
+
+    if (pts[i].is_tentative) stroke(0, 100);
+    else stroke(0);
+
     if (selected == 'field_point' && selected_index == i) strokeWeight(22);
     else strokeWeight(10);
-    point(field_size * path_points[i].x, field_size * path_points[i].y);
-    stroke(255);
+
+    point(field_size * pts[i].x, field_size * pts[i].y);
+
+    if (pts[i].is_tentative) stroke(255, 100);
+    else stroke(255);
+
     if (selected == 'field_point' && selected_index == i) strokeWeight(12);
     else strokeWeight(6);
-    point(field_size * path_points[i].x, field_size * path_points[i].y);
+
+    point(field_size * pts[i].x, field_size * pts[i].y);
   }
 
 }

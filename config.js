@@ -4,9 +4,9 @@ var config = {
 
     field_img: "./res/field.jpg",
     field_coords: {
-        start_x: 492,
+        start_x: 128,
         start_y: 141,
-        width: 732,
+        width: 733,
         height: 732
     },
 

@@ -43,7 +43,6 @@ function setup() {
   else img_scale = (height - 96) / field_img.height;
 
   field_size = field_img.width * img_scale;
-
 }
 
 function windowResized() {
@@ -65,8 +64,7 @@ function draw() {
   // draw path
   push();
   translate(0, 96);
-  draw_path_moves();
-  draw_path_points();
+  run_path_manager();
   pop();
 
   // draw side menu

@@ -1,10 +1,10 @@
-let selected_tool = null;
+let selected_tool = 'line';
 
 function draw_menu() {
   push();
 
   // draw shadow
-  translate(width - 320 - 32, 96);
+  translate(width - 352, 96);
   setGradient(0 , 0, 32, height-96, color_transparent, color_translucent_black, 'X');
   translate(32, 0);
 
@@ -22,6 +22,7 @@ function draw_menu() {
   strokeWeight(1);
   stroke(169);
   if (selected_tool == 'line') fill(169);
+  else if (mouseX > width - 304 && mouseX < width - 176 && mouseY > 176 && mouseY < 304) fill(240);
   else noFill();
   rect(16, 80, 128, 128, 16);
   noStroke();
@@ -38,13 +39,14 @@ function draw_menu() {
   strokeWeight(1);
   stroke(169);
   if (selected_tool == 'arc') fill(169);
+  else if (mouseX > width - 144 && mouseX < width - 16 && mouseY > 176 && mouseY < 304) fill(240);
   else noFill();
   rect(16, 80, 128, 128, 16);
   noStroke();
   if (selected_tool == 'arc') fill(255);
   else fill(169);
   text('Arc', 64, 192);
-  if (selected_tool == 'acr') image(icon_arc_white, 40, 88, 80, 80);
+  if (selected_tool == 'arc') image(icon_arc_white, 40, 88, 80, 80);
   else image(icon_arc_grey, 40, 88, 80, 80);
   pop();
 

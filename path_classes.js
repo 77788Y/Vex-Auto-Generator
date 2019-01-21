@@ -4,12 +4,14 @@ class Point {
     this.x = x;
     this.y = y;
     this.angle = angle;
+    this.is_tentative = false;
   }
 }
 
 class Movement {
   constructor(type="none") {
     this.type = type;
+    this.is_tentative = false;
   }
 }
 

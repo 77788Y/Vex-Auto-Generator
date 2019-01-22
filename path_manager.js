@@ -49,9 +49,15 @@ function draw_path_moves(pts, mvs) {
           endShape();
 
           // adjust angle of end point
-          mvs[i].radius = radius;
-          mvs[i].angle_diff = angle_diff;
           pts[i].angle = angle_start + angle_diff - 90;
+
+          if (i < path_moves.length) {
+            path_moves[i].angle_start = angle_start;
+            path_moves[i].angle_diff = angle_diff;
+            path_moves[i].center_x = global_center_x;
+            path_moves[i].center_y = global_center_y;
+            path_moves[i].radius = radius;
+          }
 
         break;
 

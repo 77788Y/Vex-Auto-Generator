@@ -21,15 +21,15 @@ function draw_menu() {
   // line
   strokeWeight(1);
   stroke(169);
-  if (selected_tool == 'line') fill(169);
+  if (selected_tool == 'line' || selected == 'field_line') fill(169);
   else if (mouseX > width - 304 && mouseX < width - 176 && mouseY > 176 && mouseY < 304) fill(240);
   else noFill();
   rect(16, 80, 128, 128, 16);
   noStroke();
-  if (selected_tool == 'line') fill(255);
+  if (selected_tool == 'line' || selected == 'field_line') fill(255);
   else fill(169);
   text('Line', 58, 192);
-  if (selected_tool == 'line') image(icon_line_white, 40, 88, 80, 80);
+  if (selected_tool == 'line' || selected == 'field_line') image(icon_line_white, 40, 88, 80, 80);
   else image(icon_line_grey, 40, 88, 80, 80);
 
 
@@ -38,15 +38,15 @@ function draw_menu() {
   translate(160, 0);
   strokeWeight(1);
   stroke(169);
-  if (selected_tool == 'arc') fill(169);
+  if (selected_tool == 'arc' || selected == 'field_arc') fill(169);
   else if (mouseX > width - 144 && mouseX < width - 16 && mouseY > 176 && mouseY < 304) fill(240);
   else noFill();
   rect(16, 80, 128, 128, 16);
   noStroke();
-  if (selected_tool == 'arc') fill(255);
+  if (selected_tool == 'arc' || selected == 'field_arc') fill(255);
   else fill(169);
   text('Arc', 64, 192);
-  if (selected_tool == 'arc') image(icon_arc_white, 40, 88, 80, 80);
+  if (selected_tool == 'arc' || selected == 'field_arc') image(icon_arc_white, 40, 88, 80, 80);
   else image(icon_arc_grey, 40, 88, 80, 80);
   pop();
 

@@ -26,15 +26,21 @@ function mousePressed() {
           }
         break;
 
-        // case ('arc'):
-        //   let slope = (path_points[i].y - path_points[i-1].y) / (path_points[i].x - path_points[i-1].x);
-        //   let nearest_point = slope * mouseX;
-        //   if (fabs(nearest_point - mouseY) <= 4) {
-        //     selected = 'field_line';
-        //     selected_index = i;
-        //     return;
-        //   }
-        // break;
+        case ('arc'):
+          let angle = atan2(mouseY - path_moves[i].center_y * field_size - 96, mouseX - path_moves[i].center_x * field_size);
+          let dist_squared = pow(mouseY - path_moves[i].center_y * field_size - 96, 2) + pow(mouseX - path_moves[i].center_x * field_size, 2);
+
+          if (point_in_arc(
+              new Point(mouseX, mouseY),
+              new Point(path_moves[i].center_x,
+                path_moves[i].center_y), path_moves[i].radius,
+                path_moves[i].angle_start,
+                path_moves[i].angle_diff)) {
+            selected = 'field_arc';
+            selected_index = i;
+            return;
+          }
+        break;
 
         default: break;
       }
@@ -43,11 +49,21 @@ function mousePressed() {
 
   // try to select shape tools
   if (mouseX > width - 304 && mouseX < width - 176 && mouseY > 176 && mouseY < 304) {
-    selected_tool = 'line';
+    if (selected == 'field_arc') {
+      selected = 'field_line';
+      path_moves[selected_index] = new Line();
+    }
+
+    else selected_tool = 'line';
     return;
   }
   if (mouseX > width - 144 && mouseX < width - 16 && mouseY > 176 && mouseY < 304) {
-    selected_tool = 'arc';
+    if (selected == 'field_line') {
+      selected = 'field_arc';
+      path_moves[selected_index] = new Arc();
+    }
+
+    else selected_tool = 'arc';
     return;
   }
 

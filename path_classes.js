@@ -26,6 +26,9 @@ class Arc extends Movement {
     super("arc");
     this.use_large = false;
     this.radius = 0;
+    this.angle_start = 0;
     this.angle_diff = 0;
+    this.center_x = 0;
+    this.center_y = 0;
   }
 }

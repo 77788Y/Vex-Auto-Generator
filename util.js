@@ -46,3 +46,21 @@ function setGradient(x, y, w, h, c1, c2, axis) {
     }
   }
 }
+
+function point_in_arc(point, center, radius, angle_start, angle_diff) {
+
+  let angle = -atan2(point.y - center.y, point.x - center.x);
+
+  for (var a = angle_start; (angle_diff > 0) ? (a <= angle_start + angle_diff) : (a >= angle_start + angle_diff); (angle_diff > 0) ? a++ : a--) {
+
+    let c_x = radius * cos(a);
+    let global_x = field_size * (center.x + c_x);
+    let c_y = radius * sin(a);
+    let global_y = field_size * (center.y - c_y) + 96;
+
+    let dist_squared = pow(mouseX - global_x, 2) + pow(mouseY - global_y, 2);
+    if (abs(dist_squared) <= 16) return true;
+  }
+
+  return false;
+}

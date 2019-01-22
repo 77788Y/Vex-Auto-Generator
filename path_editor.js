@@ -6,7 +6,7 @@ function run_path_manager() {
   let pts = copy_array(path_points);
   let mvs = copy_array(path_moves);
   
-  if (draw_tentative && ['line', 'arc'].includes(selected_tool)) {
+  if (mouse_in_field() && draw_tentative && ['line', 'arc'].includes(selected_tool)) {
     next_point = new Point(mouseX / field_size, (mouseY - 96) / field_size);
     next_point.is_tentative = true;
 
@@ -19,7 +19,7 @@ function run_path_manager() {
         selected_tool == 'arc' ? new Arc() : null
       );
 
-      if (keyIsDown(CONTROL) && move.type == 'arc') move.use_large = true;
+      if (xor(reverse_current_arc, selected != 'field_arc' && keyIsDown(CONTROL)) && move.type == 'arc') move.use_large = true;
 
       if (selected == 'field_point')  mvs.splice(selected_index + 1, 0, move);
       else mvs.push(move);

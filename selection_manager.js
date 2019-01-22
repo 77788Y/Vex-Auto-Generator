@@ -16,10 +16,9 @@ function mousePressed() {
       switch (path_moves[i].type) {
 
         case ('line'):
-          let slope = (path_points[i].y - path_points[i-1].y) / (path_points[i].x - path_points[i-1].x);
-          let first_point = (path_points[i].x < path_points[i-1].x) ? path_points[i] : path_points[i-1];
-          let nearest_point = slope * (mouseX - field_size * first_point.x) + 96 + field_size * first_point.y;
-          if (abs(nearest_point - mouseY) <= 4) {
+          let mouse = rotate_around_point(new Point(mouseX, mouseY), new Point(path_points[i-1].x * field_size, path_points[i-1].y * field_size + 96), atan2(path_points[i].y - path_points[i-1].y, path_points[i].x - path_points[i-1].x));
+          let end = rotate_around_point(new Point(path_points[i].x * field_size, path_points[i].y * field_size + 96), new Point(path_points[i-1].x * field_size, path_points[i-1].y * field_size + 96), atan2(path_points[i].y - path_points[i-1].y, path_points[i].x - path_points[i-1].x));
+          if (abs(mouse.y) <= 4 && mouse.x > 0 == mouse.x < end.x) {
             selected = 'field_line';
             selected_index = i;
             return;
@@ -38,6 +37,7 @@ function mousePressed() {
                 path_moves[i].angle_diff)) {
             selected = 'field_arc';
             selected_index = i;
+            reverse_current_arc = path_moves[i].use_large;
             return;
           }
         break;
@@ -67,12 +67,15 @@ function mousePressed() {
     return;
   }
 
+  // try to toggle arc side
+  if (mouseX > width - 280 && mouseX < width - 248 && mouseY > height - 84 && mouseY < height - 32 && (selected_tool == 'arc' || selected == 'field_arc')) {
+    reverse_current_arc = !reverse_current_arc;
+    if (selected == 'field_arc') path_moves[selected_index].use_large = reverse_current_arc;
+    return;
+  }
+
   // try to place point
-  if (['line', 'arc'].includes(selected_tool) &&
-      mouseX > config.field_coords.start_x * img_scale &&
-      mouseX < config.field_coords.start_x * img_scale + config.field_coords.width * img_scale &&
-      mouseY > config.field_coords.start_y * img_scale + 96 &&
-      mouseY < config.field_coords.start_y * img_scale + config.field_coords.height * img_scale + 96) {
+  if (['line', 'arc'].includes(selected_tool) && mouse_in_field()) {
 
     if (path_points.length > 0)  {
 
@@ -80,7 +83,7 @@ function mousePressed() {
         selected_tool == 'arc' ? new Arc() : null
       );
 
-      if (keyIsDown(CONTROL) && move.type == 'arc') move.use_large = true;
+      if (xor(reverse_current_arc, selected != 'field_arc' && keyIsDown(CONTROL)) && move.type == 'arc') move.use_large = true;
       
       if (selected == 'field_point') path_moves.splice(selected_index + 1, 0, move);
       else path_moves.push(move);

@@ -1,4 +1,5 @@
 let selected_tool = 'line';
+let reverse_current_arc = false;
 
 function draw_menu() {
   push();
@@ -49,6 +50,27 @@ function draw_menu() {
   if (selected_tool == 'arc' || selected == 'field_arc') image(icon_arc_white, 40, 88, 80, 80);
   else image(icon_arc_grey, 40, 88, 80, 80);
   pop();
+
+  // arc reverse thingy
+  if (selected_tool == 'arc' || selected == 'field_arc') {
+    console.log(mouseX, width - 272, mouseY, height - 48);
+    if (pow(mouseX - (width - 272), 2) + pow(mouseY - (height - 48), 2) <= 16 * 16) fill(240);
+    else noFill();
+    strokeWeight(4);
+    stroke(169);
+    ellipse(48, height - 144, 32);
+    noStroke();
+    fill(169);
+    text('Use long portion', 86, height - 135);
+
+    // draw checl mark
+    if (xor(reverse_current_arc, selected != 'field_arc' && keyIsDown(CONTROL))) {
+      noStroke();
+      fill(169);
+      ellipse(48, height - 144, 16);
+    }
+  }
+  
 
   pop();
 }

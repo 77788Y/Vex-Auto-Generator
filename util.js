@@ -64,3 +64,14 @@ function point_in_arc(point, center, radius, angle_start, angle_diff) {
 
   return false;
 }
+
+function mouse_in_field() {
+  return mouseX > config.field_coords.start_x * img_scale &&
+         mouseX < config.field_coords.start_x * img_scale + config.field_coords.width * img_scale &&
+         mouseY > config.field_coords.start_y * img_scale + 96 &&
+         mouseY < config.field_coords.start_y * img_scale + config.field_coords.height * img_scale + 96;
+}
+
+function xor(a, b) {
+  return (a || b) && !(a && b);
+}

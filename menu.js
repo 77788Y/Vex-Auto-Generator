@@ -53,7 +53,6 @@ function draw_menu() {
 
   // arc reverse thingy
   if (selected_tool == 'arc' || selected == 'field_arc') {
-    console.log(mouseX, width - 272, mouseY, height - 48);
     if (pow(mouseX - (width - 272), 2) + pow(mouseY - (height - 48), 2) <= 16 * 16) fill(240);
     else noFill();
     strokeWeight(4);

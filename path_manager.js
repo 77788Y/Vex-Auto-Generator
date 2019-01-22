@@ -1,6 +1,5 @@
 var path_points = [];
 var path_moves = [null];
-var gp = new Point();
 
 // draw all the moves of a path to the screen
 function draw_path_moves(pts, mvs) {

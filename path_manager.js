@@ -11,7 +11,7 @@ function draw_path_moves(pts, mvs) {
       // setup drawing mode
       if (pts[i-1].is_tentative || pts[i].is_tentative) stroke(0, 100);
       else stroke(0);
-      strokeWeight(4);
+      strokeWeight((['field_line', 'field_arc'].includes(selected) && selected_index == i) ? 8 : 4);
       noFill();
 
       switch (mvs[i].type) {
@@ -49,6 +49,8 @@ function draw_path_moves(pts, mvs) {
           endShape();
 
           // adjust angle of end point
+          mvs[i].radius = radius;
+          mvs[i].angle_diff = angle_diff;
           pts[i].angle = angle_start + angle_diff - 90;
 
         break;

@@ -19,6 +19,10 @@ function draw_path_moves(pts, mvs) {
         case "line":
           line(field_size * pts[i-1].x, field_size * pts[i-1].y, field_size * pts[i].x, field_size * pts[i].y);
           pts[i].angle = atan2(-(pts[i].y - pts[i-1].y), pts[i].x - pts[i-1].x);
+          if (i < path_points.length) path_points[i].angle = pts[i].angle;
+          if (i < path_moves.length) {
+            path_moves[i].angle = pts[i].angle;
+          }
         break;
 
         // draw arc
@@ -49,10 +53,12 @@ function draw_path_moves(pts, mvs) {
 
           // adjust angle of end point
           pts[i].angle = angle_start + angle_diff - 90;
+          if (i < path_points.length) path_points[i].angle = pts[i].angle;
 
           if (i < path_moves.length) {
             path_moves[i].angle_start = angle_start;
             path_moves[i].angle_diff = angle_diff;
+            path_moves[i].angle_end = angle_start + angle_diff;
             path_moves[i].center_x = global_center_x;
             path_moves[i].center_y = global_center_y;
             path_moves[i].radius = radius;

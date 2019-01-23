@@ -30,10 +30,12 @@ function run_path_manager() {
   draw_path_points(pts);
 }
 
+let dragging = false;
 function mouseDragged() {
 
   if (selected == 'field_point') {
     draw_tentative = false;
+    dragging = true;
     path_points[selected_index].x = mouseX / field_size;
     path_points[selected_index].y = (mouseY - 96) / field_size;
   }
@@ -41,4 +43,8 @@ function mouseDragged() {
 
 function mouseReleased() {
   draw_tentative = true;
+  if (dragging) {
+    save_to_file(JSON.stringify(save_path()));
+    dragging = false;
+  }
 }

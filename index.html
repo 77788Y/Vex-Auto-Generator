@@ -24,11 +24,17 @@
         a[href] {
             background-color: #FFFFFF;
         }
-        a:hover{
+        a[href]:hover{
             background:#f0f0f0;
         }
-        a:active{
+        a[href]:active{
             background:#A9A9A9;
+        }
+        img {
+            opacity: .5;
+        }
+        img[available] {
+            opacity: 1;
         }
 
     </style>
@@ -42,17 +48,18 @@
     <script src="selection_manager.js"></script>
     <script src="path_editor.js"></script>
     <script src="menu.js"></script>
+    <script src="file_generator.js"></script>
     <script src="save_load.js"></script>
     <script src="sketch.js"></script>
   </head>
   <body>
 
     <a id="btn_save" style="position: absolute; right: 80; float: right;">
-        <img src="res/icon_save.png" style="width: 40px; height: 40px; position: relative; left: 12; top: 12;"/>
+        <img id="btn_save_img" src="res/icon_save.png" style="width: 40px; height: 40px; position: relative; left: 12; top: 12;"/>
     </a>
 
     <a id="btn_generate" style="position: absolute; right: 0; float: right;">
-            <img src="res/icon_compile.png" style="width: 40px; height: 40px; position: relative; left: 12; top: 12;"/>
+            <img id="btn_generate_img" src="res/icon_compile.png" style="width: 40px; height: 40px; position: relative; left: 12; top: 12;"/>
     </a>
 
   </body>

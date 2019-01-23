@@ -52,6 +52,7 @@ function mousePressed() {
     if (selected == 'field_arc') {
       selected = 'field_line';
       path_moves[selected_index] = new Line();
+      save_to_file(JSON.stringify(save_path()))
     }
 
     else selected_tool = 'line';
@@ -61,6 +62,7 @@ function mousePressed() {
     if (selected == 'field_line') {
       selected = 'field_arc';
       path_moves[selected_index] = new Arc();
+      save_to_file(JSON.stringify(save_path()));
     }
 
     else selected_tool = 'arc';
@@ -70,7 +72,10 @@ function mousePressed() {
   // try to toggle arc side
   if (mouseX > width - 280 && mouseX < width - 248 && mouseY > height - 84 && mouseY < height - 32 && (selected_tool == 'arc' || selected == 'field_arc')) {
     reverse_current_arc = !reverse_current_arc;
-    if (selected == 'field_arc') path_moves[selected_index].use_large = reverse_current_arc;
+    if (selected == 'field_arc') {
+      path_moves[selected_index].use_large = reverse_current_arc;
+      save_to_file(JSON.stringify(save_path()));
+    }
     return;
   }
 
@@ -94,6 +99,8 @@ function mousePressed() {
 
     selected_index++;
     if (selected == 'field_point' && selected_index >= path_points.length - 1) selected = null;
+    
+    save_to_file(JSON.stringify(save_path()));
     return;
   }
 

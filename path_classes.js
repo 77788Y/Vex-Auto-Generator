@@ -18,6 +18,7 @@ class Movement {
 class Line extends Movement {
   constructor() {
     super("line");
+    this.angle = 0;
   }
 }
 
@@ -28,6 +29,7 @@ class Arc extends Movement {
     this.radius = 0;
     this.angle_start = 0;
     this.angle_diff = 0;
+    this.angle_end = 0;
     this.center_x = 0;
     this.center_y = 0;
   }

@@ -15,6 +15,7 @@ function load_path(path) {
     selected_tool = null;
     reverse_current_arc = false;
     draw_tentative = true;
+    save_to_file(save_path())
 }
 
 function save_path() {
@@ -39,8 +40,8 @@ function save_to_file(text) {
     
     if (path_moves.length > 1) {
         let generate_btn = document.getElementById("btn_generate");
-        generate_btn.href = generate_file_blob();
-        generate_btn.setAttribute('download', program_name + '.cpp');
+        generate_btn.href = 'javascript:generate_file_blob()';
+        generate_btn.removeAttribute('download');
         document.getElementById('btn_generate_img').setAttribute('available', true);
     }
     return text_file;

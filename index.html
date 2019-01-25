@@ -54,12 +54,18 @@
   </head>
   <body>
 
+    <input type="file" id="file_upload" accept=".json,.txt" onchange="load_path_from_file(this.files[0]);" style="display: none;"/>
+
+    <a id="btn_load" href="#" onclick="document.getElementById('file_upload').click();" style="position: absolute; right: 160; float: right;">
+        <img id="btn_load_img" available='true' src="res/icon_load.png" style="width: 40px; height: 40px; position: relative; left: 12; top: 12;"/>
+    </a>
+
     <a id="btn_save" style="position: absolute; right: 80; float: right;">
         <img id="btn_save_img" src="res/icon_save.png" style="width: 40px; height: 40px; position: relative; left: 12; top: 12;"/>
     </a>
 
     <a id="btn_generate" style="position: absolute; right: 0; float: right;">
-            <img id="btn_generate_img" src="res/icon_compile.png" style="width: 40px; height: 40px; position: relative; left: 12; top: 12;"/>
+        <img id="btn_generate_img" src="res/icon_compile.png" style="width: 40px; height: 40px; position: relative; left: 12; top: 12;"/>
     </a>
 
   </body>

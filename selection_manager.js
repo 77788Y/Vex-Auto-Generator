@@ -106,5 +106,14 @@ function mousePressed() {
 
   selected = null;
   return;
+}
 
+function keyPressed() {
+
+  if (keyCode == DELETE && selected == 'field_point') {
+    path_points.splice(selected_index, 1);
+    path_moves.splice(selected_index, 1);
+    selected_index--;
+    if (selected_index < 0) selected_index = 0;
+  }
 }

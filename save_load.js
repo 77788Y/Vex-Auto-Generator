@@ -6,6 +6,13 @@ class Path {
     }
 }
 
+function load_path_from_file(file) {
+    if (file == null) return false;
+    let reader = new FileReader();
+    reader.onload = function() {load_path(JSON.parse(reader.result));}
+    reader.readAsText(file);
+}
+
 function load_path(path) {
 
     path_points = path.pts;

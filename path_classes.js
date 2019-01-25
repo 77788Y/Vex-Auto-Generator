@@ -5,6 +5,7 @@ class Point {
     this.y = y;
     this.angle = angle;
     this.is_tentative = false;
+    this.brake = true;
   }
 }
 

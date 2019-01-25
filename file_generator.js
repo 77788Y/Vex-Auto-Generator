@@ -39,13 +39,13 @@ function generate_file_blob() {
 
           // move length of line
           let dist = sqrt(pow((path_points[i].x - path_points[i-1].x) * scalar, 2) + pow((path_points[i].y - path_points[i-1].y) * scalar, 2));
-          file_text += '\t' + config.function_move_dist.replace('%l', dist).replace('%r', dist).replace('%s', i+1 >= path_moves.length || path_moves[i+1].type != 'arc') + ';\n';
+          file_text += '\t' + config.function_move_dist.replace('%l', dist).replace('%r', dist).replace('%s', path_points[i].brake) + ';\n';
         break;
 
         case 'arc':
           
           // move along arc
-          file_text += '\t' + config.function_move_arc.replace('%r', path_moves[i].radius * scalar).replace('%a', path_moves[i].angle_diff).replace('%s', i+1 >= path_moves.length || (path_moves[i+1].type != 'arc' && path_points[i+1].angle != path_points[i].angle)) + ';\n';
+          file_text += '\t' + config.function_move_arc.replace('%r', path_moves[i].radius * scalar).replace('%a', path_moves[i].angle_diff).replace('%s', path_points[i].brake) + ';\n';
         break;
       }
     }

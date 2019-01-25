@@ -62,8 +62,27 @@ function draw_menu() {
     fill(169);
     text('Use long portion', 86, height - 135);
 
-    // draw checl mark
+    // draw check mark
     if (xor(reverse_current_arc, selected != 'field_arc' && keyIsDown(CONTROL))) {
+      noStroke();
+      fill(169);
+      ellipse(48, height - 144, 16);
+    }
+  }
+
+  // stop after movement?
+  if (selected_tool == null && selected == 'field_point') {
+    if (pow(mouseX - (width - 272), 2) + pow(mouseY - (height - 48), 2) <= 16 * 16) fill(240);
+    else noFill();
+    strokeWeight(4);
+    stroke(169);
+    ellipse(48, height - 144, 32);
+    noStroke();
+    fill(169);
+    text('Brake robot at point', 86, height - 135);
+
+    // draw check mark
+    if (path_points[selected_index].brake) {
       noStroke();
       fill(169);
       ellipse(48, height - 144, 16);

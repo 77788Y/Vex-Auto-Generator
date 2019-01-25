@@ -79,6 +79,13 @@ function mousePressed() {
     return;
   }
 
+  // try to toggle brake at point
+  if (mouseX > width - 280 && mouseX < width - 248 && mouseY > height - 84 && mouseY < height - 32 && (selected_tool == null && selected == 'field_point')) {
+    path_points[selected_index].brake = !path_points[selected_index].brake;
+    save_to_file(JSON.stringify(save_path()));
+    return;
+  }
+
   // try to place point
   if (['line', 'arc'].includes(selected_tool) && mouse_in_field()) {
 
@@ -104,7 +111,7 @@ function mousePressed() {
     return;
   }
 
-  selected = null;
+  if (mouse_in_field()) selected = null;
   return;
 }
 
